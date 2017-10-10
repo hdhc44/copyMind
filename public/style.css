@@ -1,0 +1,38 @@
+body{
+  margin:0;
+}
+#container{
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.field{
+  margin: 10px;
+}
+input{
+  border: 1px solid #36afff;
+  color: #36afff;
+  border-radius: 25px;
+  text-align: center;
+  width: 50px;
+  height: 35px;
+}
+button{
+  border: none;
+  background-color: #36afff;
+  border-radius: 25px;
+  height: 35px;
+  width: 70px;
+  color: white;
+  -webkit-transition: background-color 0.4s;
+  transition: background-color 0.4s;
+}
+button:hover{
+  background-color: #329de5;
+}
+#color{
+  width: 100px;
+}

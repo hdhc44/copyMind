@@ -1,0 +1,21 @@
+{
+  "name": "canvas",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+    "start":"node server.js"
+  },
+  "keyword":[
+    "sockets",
+    "p5.js",
+    "node"
+  ]
+  "author": "JungWoo Song",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.2",
+    "socket.io": "^2.0.3"
+  }
+}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Canvas</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.15/p5.js"></script>
+
+
+
+</head>
+
+<body>
+    <div id="container">
+        <div id="canvas">
+
+        </div>
+
+
+        <div class="field">
+            <span>넓이&nbsp</span><input type="number" id="width">
+            <span>높이&nbsp</span><input type="number" id="height">
+            <button type="button" name="button" id="changeBtn">바꾸기</button>
+        </div>
+        <div class="field">
+          <span>붓 색깔&nbsp</span><input type="text" id="colorInput">
+          <button type="button" name="button" id="colorBtn">색깔 바꾸기</button>
+        </div>
+    </div>
+    <script src="sketch.js"></script>
+</body>
+
+</html>
