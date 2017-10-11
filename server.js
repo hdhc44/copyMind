@@ -1,33 +1,59 @@
 var express = require('express');
 var app = express();
+var fs = require('fs');
+var ejs = require('ejs');
+var http = require('http')
 
-var server = app.listen(8080);
+var server = http.createServer(app).listen(8080);
 app.use(express.static('public'));
 
 console.log("server running");
 
 var socket = require('socket.io');
 
-var io = socket(server);
-io.on('connection', newConnection);
+app.get('/',(req,res)=>{
+  fs.readFile('start.html', (error, data)=>{
+    res.send(data.toString());
+  });
+});
 
-function newConnection(socket){
+app.get('/:room', (req,res)=>{
+  fs.readFile('canvas.html', 'utf8', (error,data)=>{
+    res.send(ejs.render(data,{
+      data:{room: req.params.room}
+    }));
+      console.log(data.room);
+  });
+});
+
+var io = socket(server);
+
+io.sockets.on('connection', (socket)=>{
+
   console.log('new connection' + socket.id);
 
-  socket.on('mouse', mouseMsg);
-  socket.on('canvas', canvasChange);
-  socket.on('colors', colorChange);
+  var roomName="";
+  var sentData="";
 
-  function mouseMsg(data){
-    socket.broadcast.emit('mouse' ,data);
-    // console.log(data);
-  }
-  function canvasChange(data){
-    socket.broadcast.emit('canvas', data);
-    // console.log(data);
-  }
-  function colorChange(data){
-    socket.broadcast.emit('colors' ,data);
+  socket.on('joinRoom', (data)=>{
+    roomName = data;
+    socket.join(roomName);
+    console.log(roomName);
+  });
 
-  }
-}
+  socket.on('sendData',(data)=>{
+    sentData = data;
+    console.log(sentData);
+  });
+
+  socket.on('mouse', function mouseMsg(data){
+    io.sockets.in(roomName).emit('mouse',data);
+  });
+  socket.on('canvas',function canvasChange(data){
+    io.sockets.in(roomName).emit('canvas',data);
+  });
+  socket.on('colors',function colorChange(data){
+    io.sockets.in(roomName).emit('colors',data);
+  });
+
+});

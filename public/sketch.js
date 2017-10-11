@@ -1,4 +1,3 @@
-
 var socket;
 var yourwidth = document.getElementById('width');
 var yourheight = document.getElementById('height');
@@ -13,14 +12,19 @@ document.getElementById('colorBtn').addEventListener('click',function(){
 })
 
 
+socket = io.connect('http://localhost:8080');
+
+var data = document.URL;
+var sliced = data.split('8080/')[1];
+console.log(sliced);
+socket.emit('joinRoom',sliced);
+
 
 function setup(){
   var canvas = createCanvas(500,500);
   background(50);
   canvas.parent('canvas');
   c = color('#fff');
-
-  socket = io.connect('http://localhost:8080');
 
   //trigger
   socket.on('mouse', newDrawing);
@@ -41,7 +45,6 @@ function mouseDragged(){
   stroke(c);
   strokeWeight(10);
   line(mouseX, mouseY, pmouseX, pmouseY);
-
 }
 
 //상대편에 새로 그리기

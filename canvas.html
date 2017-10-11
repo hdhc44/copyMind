@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CopyMind</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,400" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="/socket.io/socket.io.js"></script>
+    <script
+          src="https://code.jquery.com/jquery-3.2.1.min.js"
+          integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+          crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.15/p5.js"></script>
+</head>
+
+<body>
+  <h1 id="title">CopyMind</h1>
+    <div id="container">
+        <div id="canvas">
+
+        </div>
+        <div class="field">
+            <span>Width&nbsp</span><input type="number" id="width">
+            <span>Height&nbsp</span><input type="number" id="height">
+            <button type="button" name="button" id="changeBtn">Size</button>
+        </div>
+        <div class="field">
+          <span>Brush Color&nbsp</span><input type="text" id="colorInput">
+          <button type="button" name="button" id="colorBtn">Color</button>
+        </div>
+    </div>
+    <script src="./sketch.js"></script>
+</body>
+
+</html>
