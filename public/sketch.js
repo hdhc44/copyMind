@@ -30,6 +30,7 @@ function setup(){
   socket.on('mouse', newDrawing);
   socket.on('canvas', newCanvas);
   socket.on('colors', newColor);
+  socket.on('save data', drawed);
 }
 
 function mouseDragged(){
@@ -39,22 +40,40 @@ function mouseDragged(){
     px: pmouseX,
     py: pmouseY
   }
-  socket.emit('mouse' ,mouseData); // 마우스 위치정보 전달
-
-  noStroke();
+  
   stroke(c);
   strokeWeight(10);
   line(mouseX, mouseY, pmouseX, pmouseY);
+
+  //마우스 좌표값을 배열에 저장
+  var drawedData = {
+    drawedx: mouseData.x,
+    drawedy: mouseData.y,
+    drawedpy: mouseData.py,
+    drawedpx: mouseData.px
+  }
+  // drawedData.push(mouseData.x,mouseData.y,mouseData.px,mouseData.py);
+  // drawedData = JSON.stringify(drawedData);
+  // drawedData = drawedData.replace(/[\[\]']+/g,'');
+  console.log(drawedData);
+
+  socket.emit('mouse' ,mouseData); // 마우스 위치정보 전달
+  socket.emit('save data',drawedData);
+  
+}
+
+//저장되어있던 그림을 그림
+function drawed(drawedData){
+  stroke(c);
+  strokeWeight(10);
+  // line(drawedData);
 }
 
 //상대편에 새로 그리기
 function newDrawing(mouseData){
-  // noStroke();
-  // fill(255);
-  // ellipse(mouseData.x,mouseData.y,30,30);
   stroke(c);
   strokeWeight(10);
-  line(mouseData.x,mouseData.y,mouseData.px,mouseData.py)
+  line(mouseData.x,mouseData.y,mouseData.px,mouseData.py);
 }
 
 
